@@ -102,25 +102,25 @@ a {
 .contact-icons {
     display: flex;
     gap: 20px;
-    font-size: 2rem; /* bigger icons */
+    font-size: 2rem;
     margin-top: 10px;
 }
 
 .contact-icons a {
-    color: #333; /* icon color */
+    color: #333; 
     transition: color 0.3s ease;
 }
 
 .contact-icons a:hover {
-    color: #0077b5; /* LinkedIn blue for example */
+    color: #0077b5; 
 }
 
 .contact-icons a:nth-child(4):hover {
-    color: #333; /* GitHub black on hover */
+    color: #333; 
 }
 
 .contact-icons a:nth-child(1):hover,
 .contact-icons a:nth-child(2):hover {
-    color: #d44638; /* Gmail red on hover */
+    color: #1a1110; 
 }
 

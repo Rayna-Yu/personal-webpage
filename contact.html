@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Rayna Yu</title>
+    <title>Contact - Rayna Yu</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="styles/style.css" />
+    <link rel="stylesheet" href="styles/contact.css" />
 </head>
 <body>
     <header>
@@ -20,12 +21,20 @@
         </nav>
     </header>
 
-    <section id="about">
-        <h2>About Me</h2>
-        <p>Hi! I'm Rayna Yu, an undergraduate student studying Computer Science and Math at Northeastern University. 
-            I'm passionate about building creative and impactful technologies, from pedestrian-focused navigation models 
-            to AI and systems research. I love exploring the intersection of code, creativity, and community, 
-            and I'm always excited to learn more.</p>
+    <section id="contact-form">
+        <h2>Connect With Me!</h2>
+        <form id="contact" action="#" method="POST">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your Name" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required>
+
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="6" placeholder="Your message..." required></textarea>
+
+            <button type="submit">Send Message</button>
+        </form>
     </section>
 
     <section id="Socials">
