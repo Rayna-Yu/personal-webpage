@@ -7,13 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="styles/style.css" />
-  <style>
-    .project { border: 1px solid #ddd; border-radius: 10px; margin-bottom: 1rem; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05);}
-    .project-header { background: #fafafa; padding: 1rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-    .project-header:hover { background: #f0f0f0; }
-    .project-details { display: none; padding: 1rem; line-height: 1.6; }
-    .active .project-details { display: block; }
-  </style>
+  <link rel="stylesheet" href="styles/project.css"/>
 </head>
 <body>
   <header>
@@ -23,6 +17,7 @@
       <a href="index.html">About</a>
       <a href="projects.html">Projects</a>
       <a href="resume.html">Resume</a>
+      <a href="gallery.html">Gallery</a>
       <a href="contact.html">Contact</a>
     </nav>
   </header>
@@ -64,7 +59,7 @@
         In essence, the program encodes the <a href="https://paradise.caltech.edu/ist4/lectures/Bouton1901.pdf">winning strategy</a> 
         discovered by C. Bouton in 1901. 
         <br><br>
-        See if you can beat the computer! ...
+        See if you can beat the computer! <a href="nim-sum.html">-></a>
       </div>
     </div>
 
@@ -94,6 +89,7 @@
   </section>
 
   <section id="Socials">
+    <h1>Socials</h1>
     <div class="contact-icons">
       <a href="https://linkedin.com/in/rayna-yu" target="_blank" rel="noopener noreferrer" title="LinkedIn Profile">
         <i class="fab fa-linkedin"></i>
@@ -105,12 +101,21 @@
   </section>
 
   <script>
-    document.querySelectorAll('.project-header').forEach(header => {
-      header.addEventListener('click', () => {
+    const headers = document.querySelectorAll('.project-header');
+
+    headers.forEach(header => {
+        header.addEventListener('click', () => {
         const project = header.parentElement;
-        project.classList.toggle('active');
-      });
+        const isActive = project.classList.contains('active');
+
+        document.querySelectorAll('.project').forEach(p => p.classList.remove('active'));
+
+        if (!isActive) {
+            project.classList.add('active');
+        }
+        });
     });
-  </script>
+    </script>
+
 </body>
 </html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nim Game</title>
+  <link rel="stylesheet" href="styles/nimsum.css"/>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    .row {
+      margin: 10px;
+      display: flex;
+      justify-content: center; /* center tokens only */
+      align-items: center;
+      cursor: pointer;
+      position: relative;
+    }
+    .token {
+      width: 20px;
+      height: 20px;
+      background: orange;
+      margin: 2px;
+      border-radius: 50%;
+    }
+    .controls {
+      margin-left: 15px;
+    }
+    .controls button {
+      margin: 0 5px;
+    }
+    /* modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 400px;
+      text-align: left;
+    }
+    .close-btn {
+      float: right;
+      cursor: pointer;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Nim Game</h1>
+  <p>Try to beat the computer! Click a row to select it, then choose how many tokens to take.</p>
+  <button id="instructionsBtn">How to play!</button>
+  <div id="board"></div>
+  <p id="status"></p>
+
+  <!-- Instructions Modal -->
+  <div id="instructionsModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeModal">&times;</span>
+      <h3>Instructions</h3>
+      <p>
+        Nim is a mathematical game of strategy. Players take turns removing 1 or more tokens from a single row. 
+        The player forced to take the last token loses. Try to beat the computer using strategic moves!
+      </p>
+    </div>
+  </div>
+
+  <script>
+    let board = [];
+    let currentPlayer = 1; // 1 = player, 2 = computer
+    let selectedRow = null;
+
+    function makeBoard() {
+      let rows = Math.floor(Math.random() * 7) + 2;
+      return Array.from({length: rows}, () => Math.floor(Math.random() * 6) + 1);
+    }
+
+    board = makeBoard();
+    drawBoard();
+
+    function drawBoard() {
+      const boardDiv = document.getElementById("board");
+      boardDiv.innerHTML = "";
+      board.forEach((count, i) => {
+        const rowDiv = document.createElement("div");
+        rowDiv.classList.add("row");
+
+        // tokens
+        const tokensWrapper = document.createElement("div");
+        tokensWrapper.style.display = "flex";
+        tokensWrapper.style.justifyContent = "center";
+        for (let j = 0; j < count; j++) {
+          const token = document.createElement("div");
+          token.classList.add("token");
+          tokensWrapper.appendChild(token);
+        }
+        rowDiv.appendChild(tokensWrapper);
+
+        if (i === selectedRow) rowDiv.style.background = "#f0f0f0";
+
+        rowDiv.onclick = () => {
+          if (currentPlayer !== 1 || count === 0) return;
+          selectedRow = i;
+          drawBoard();
+          showControls(i);
+        }
+
+        boardDiv.appendChild(rowDiv);
+      });
+    }
+
+    function showControls(rowIndex) {
+      const oldControls = document.querySelector(".controls");
+      if (oldControls) oldControls.remove();
+
+      const rowDiv = document.getElementById("board").children[rowIndex];
+      const controls = document.createElement("div");
+      controls.classList.add("controls");
+
+      let amount = 1;
+      const label = document.createElement("span");
+      label.textContent = amount;
+
+      const minusBtn = document.createElement("button");
+      minusBtn.textContent = "-";
+      minusBtn.onclick = (e) => {
+        e.stopPropagation();
+        if (amount > 1) { amount--; label.textContent = amount; }
+      };
+
+      const plusBtn = document.createElement("button");
+      plusBtn.textContent = "+";
+      plusBtn.onclick = (e) => {
+        e.stopPropagation();
+        if (amount < board[rowIndex]) { amount++; label.textContent = amount; }
+      };
+
+      const takeBtn = document.createElement("button");
+      takeBtn.textContent = "Take";
+      takeBtn.onclick = (e) => {
+        e.stopPropagation();
+        playerMove(rowIndex, amount);
+        selectedRow = null;
+      }
+
+      controls.appendChild(minusBtn);
+      controls.appendChild(label);
+      controls.appendChild(plusBtn);
+      controls.appendChild(takeBtn);
+
+      rowDiv.appendChild(controls);
+    }
+
+    function nimSum(arr) { return arr.reduce((a,b) => a ^ b, 0); }
+    function isWinningBoard(arr) { return nimSum(arr) !== 0; }
+    function gameOver() { return board.every(v => v === 0); }
+
+    function playerMove(rowIndex, take) {
+      if (currentPlayer !== 1 || board[rowIndex] === 0) return;
+      board[rowIndex] -= take;
+      currentPlayer = 2;
+      drawBoard();
+      checkGame();
+      setTimeout(computerMove, 800);
+    }
+
+    function computerMove() {
+      if (currentPlayer !== 2) return;
+
+      if (!isWinningBoard(board)) {
+        let nonEmpty = board.map((v,i)=>v>0?i:-1).filter(i=>i>=0);
+        let row = nonEmpty[Math.floor(Math.random()*nonEmpty.length)];
+        let take = Math.floor(Math.random()*board[row]) + 1;
+        board[row] -= take;
+      } else {
+        for (let i=0;i<board.length;i++){
+          for (let take=1; take<=board[i]; take++){
+            let copy = [...board]; copy[i]-=take;
+            if (nimSum(copy) === 0){
+              board[i]-=take; i=board.length; break;
+            }
+          }
+        }
+      }
+
+      currentPlayer = 1;
+      drawBoard();
+      checkGame();
+    }
+
+    function checkGame() {
+      const status = document.getElementById("status");
+      if (gameOver()) {
+        status.textContent = currentPlayer === 1 ? "Computer wins!" : "You win!";
+      } else {
+        status.textContent = currentPlayer === 1 ? "Your turn!" : "Computer’s turn...";
+      }
+    }
+
+    // Instructions modal
+    const modal = document.getElementById("instructionsModal");
+    document.getElementById("instructionsBtn").onclick = () => { modal.style.display = "flex"; }
+    document.getElementById("closeModal").onclick = () => { modal.style.display = "none"; }
+    window.onclick = (e) => { if (e.target === modal) modal.style.display = "none"; }
+
+    checkGame();
+  </script>
+</body>
+</html>
