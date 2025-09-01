@@ -10,24 +10,27 @@
   <link rel="stylesheet" href="styles/project.css"/>
 </head>
 <body>
-  <header>
-    <h1>Rayna Yu</h1>
-    <p>Student · Researcher · Developer</p>
-    <nav>
-      <a href="index.html">About</a>
-      <a href="projects.html">Projects</a>
-      <a href="resume.html">Resume</a>
-      <a href="gallery.html">Gallery</a>
-      <a href="contact.html">Contact</a>
-    </nav>
+  <header class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">Rayna Yu</h1>
+      <p class="hero-subtitle">Student · Researcher · Developer</p>
+      <nav class="nav-links">
+        <a href="index.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="resume.html">Resume</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
   </header>
 
   <section id="projects">
     <h2>Projects</h2>
 
-    <div class="project">
+    <div class="project fade-in">
       <div class="project-header">
         <span>NavigAid</span>
+        <i class="fas fa-chevron-right"></i>
       </div>
       <div class="project-details">
         NavigAid is a pedestrian routing engine that leverages GIS data, city infrastructure datasets, 
@@ -36,9 +39,10 @@
       </div>
     </div>
 
-    <div class="project">
+    <div class="project fade-in">
       <div class="project-header">
         <span>Robot Path Finder</span>
+        <i class="fas fa-chevron-right"></i>
       </div>
       <div class="project-details">
         Robot Path Finder is an interactive MATLAB program of a 2D robot simulator 
@@ -46,9 +50,10 @@
       </div>
     </div>
 
-    <div class="project">
+    <div class="project fade-in">
       <div class="project-header">
-        <span>Nim Sum Player</span> 
+        <span>Nim Sum Player</span>
+        <i class="fas fa-chevron-right"></i>
       </div>
       <div class="project-details">
         Nim Sum Player is an interactive computer program that plays the classic mathematical strategy
@@ -63,9 +68,10 @@
       </div>
     </div>
 
-    <div class="project">
+    <div class="project fade-in">
       <div class="project-header">
         <span>Smart Image Shrinker</span>
+        <i class="fas fa-chevron-right"></i>
       </div>
       <div class="project-details">
         Smart Image Shrinker is a smarter way of shrinking an image. Instead of cropping and losing important information,
@@ -77,45 +83,49 @@
       </div>
     </div>
 
-    <div class="project">
+    <div class="project fade-in">
       <div class="project-header">
         <span>Calendar Application</span>
+        <i class="fas fa-chevron-right"></i>
       </div>
       <div class="project-details">
-        Designed a calendar app using Object Oriented Design principles and MVC architecture, 
-        supporting event creation, deletion, and editing with a graphical interface.
+        Designed a calendar app using Object-Oriented Design principles and MVC architecture. Exploring different design patterns
+        including, builder design patter, controller design pattern, ...
       </div>
     </div>
   </section>
 
-  <section id="Socials">
+  <section id="socials" class="card fade-in">
     <h1>Socials</h1>
     <div class="contact-icons">
-      <a href="https://linkedin.com/in/rayna-yu" target="_blank" rel="noopener noreferrer" title="LinkedIn Profile">
-        <i class="fab fa-linkedin"></i>
-      </a>
-      <a href="https://github.com/rayna-yu" target="_blank" rel="noopener noreferrer" title="GitHub Profile">
-        <i class="fab fa-github"></i>
-      </a>
+      <a href="https://linkedin.com/in/rayna-yu" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+      <a href="https://github.com/rayna-yu" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
     </div>
   </section>
+
+  <footer>
+    <p>Built with ❤️ and code</p>
+  </footer>
 
   <script>
     const headers = document.querySelectorAll('.project-header');
-
     headers.forEach(header => {
-        header.addEventListener('click', () => {
+      header.addEventListener('click', () => {
         const project = header.parentElement;
         const isActive = project.classList.contains('active');
 
         document.querySelectorAll('.project').forEach(p => p.classList.remove('active'));
 
-        if (!isActive) {
-            project.classList.add('active');
-        }
-        });
+        if (!isActive) project.classList.add('active');
+      });
     });
-    </script>
+
+    const faders = document.querySelectorAll('.fade-in');
+    faders.forEach((el, i) => {
+      el.style.animationDelay = `${i * 0.2}s`;
+      el.classList.add('visible');
+    });
+  </script>
 
 </body>
 </html>
