@@ -6,12 +6,18 @@
   <title>Nim Game</title>
   <link rel="stylesheet" href="styles/nimsum.css"/>
 </head>
+<header>
+    <nav>
+        <a href="projects.html">Back</a>
+    </nav>
+</header>
 <body>
   <h1>Nim Game</h1>
   <p>Try to beat the computer! Click a row to select it, then choose how many tokens to take.</p>
   <button id="instructionsBtn">How to play!</button>
   <div id="board"></div>
   <p id="status"></p>
+  <button id="newGame">New Game</button>
 
   <!-- Instructions Modal -->
   <div id="instructionsModal" class="modal">
@@ -74,6 +80,7 @@
         if (oldControls) oldControls.remove();
 
         const rowDiv = document.getElementById("board").children[rowIndex];
+        const boardDiv = document.getElementById("board");
         const controls = document.createElement("div");
         controls.classList.add("controls");
 
@@ -102,12 +109,15 @@
             playerMove(rowIndex, amount);
         }
 
+        const rowNumber = document.createElement("a");
+        rowNumber.textContent = "Taking from row number " + (rowIndex + 1) + ": ";
+        controls.appendChild(rowNumber);
         controls.appendChild(minusBtn);
         controls.appendChild(label);
         controls.appendChild(plusBtn);
         controls.appendChild(takeBtn);
 
-        rowDiv.appendChild(controls);
+        boardDiv.appendChild(controls);
     }
 
 
@@ -156,6 +166,15 @@
         status.textContent = currentPlayer === 1 ? "Your turn!" : "Computer’s turn...";
       }
     }
+
+    document.getElementById("newGame").onclick = () => {
+      board = makeBoard(); 
+      currentPlayer = 1;  
+      selectedRow = null;
+      drawBoard();  
+      checkGame();    
+    };
+
 
     // Instructions modal
     const modal = document.getElementById("instructionsModal");
