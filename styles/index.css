@@ -1,0 +1,28 @@
+#about {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+#about img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: transform 0.3s;
+}
+
+#about img:hover {
+    transform: scale(1.05) rotate(2deg);
+}
+
+#about .about-text {
+    flex: 1;
+    min-width: 250px;
+    font-size: 1rem;
+    color: #333;
+    line-height: 1.6;
+}
