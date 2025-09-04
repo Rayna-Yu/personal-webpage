@@ -79,3 +79,26 @@
 .gallery-item:hover .overlay {
     opacity: 1;
 }
+
+.top-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: #2c45ab;
+  color: white;
+  padding: 12px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  display: none;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  transition: background-color 0.3s, opacity 0.3s;
+  z-index: 1100;
+}
+
+.top-button:hover {
+  background-color: #306ed3;
+  opacity: 0.9;
+}
+
+

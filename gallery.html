@@ -32,6 +32,8 @@
 
   <main id="gallery-container"></main>
 
+  <a href="#" id="return-top" class="top-button">↑ Top</a>
+
   <footer>
     <p>Built with assistance from Duke (my cat) 🐾</p>
   </footer>
@@ -119,6 +121,22 @@
           .scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     });
+
+    const returnTop = document.getElementById("return-top");
+
+    window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+        returnTop.style.display = "block";
+    } else {
+        returnTop.style.display = "none";
+    }
+    });
+
+    returnTop.addEventListener("click", (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
   </script>
 </body>
 </html>
