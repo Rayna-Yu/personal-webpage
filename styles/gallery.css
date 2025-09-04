@@ -12,13 +12,13 @@
 
 .section-nav a {
     text-decoration: none;
-    color: #4A90E2;
+    color: #2c45ab;
     font-weight: 600;
     transition: color 0.3s;
 }
 
 .section-nav a:hover {
-    color: #1c5bbf;
+    color: #306ed3;
 }
 
 .gallery-section {
@@ -33,7 +33,7 @@
 .gallery-section h2 {
     text-align: center;
     font-size: 2.25rem;
-    color: #4A90E2;
+    color: #1E2749;
     margin-bottom: 2rem;
 }
 
