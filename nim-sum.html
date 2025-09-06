@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nim Game</title>
-  <link rel="stylesheet" href="styles/nimsum.css"/>
+  <link rel="stylesheet" href="styles/supplemental.css"/>
 </head>
 <header>
     <nav>
@@ -19,7 +19,6 @@
   <p id="status"></p>
   <button id="newGame">New Game</button>
 
-  <!-- Instructions Modal -->
   <div id="instructionsModal" class="modal">
     <div class="modal-content">
       <span class="close-btn" id="closeModal">&times;</span>
@@ -175,8 +174,6 @@
       checkGame();    
     };
 
-
-    // Instructions modal
     const modal = document.getElementById("instructionsModal");
     document.getElementById("instructionsBtn").onclick = () => { modal.style.display = "flex"; }
     document.getElementById("closeModal").onclick = () => { modal.style.display = "none"; }
