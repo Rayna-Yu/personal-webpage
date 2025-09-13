@@ -15,8 +15,8 @@
       <p class="hero-subtitle">Student · Researcher · Developer</p>
       <nav class="nav-links">
         <a href="index.html">About</a>
-        <a href="projects.html">Projects</a>
         <a href="resume.html">Resume</a>
+        <a href="projects.html">Projects</a>
         <a href="gallery.html">Gallery</a>
         <a href="contact.html">Contact</a>
       </nav>
@@ -40,10 +40,10 @@
   <script>
     const galleryData = {
       celestial: [
-        { file: "northearn-lights1", caption: "Northearn light's in MA" },
-        { file: "northearn-lights2", caption: "Northern light's my backyard" },
-        { file: "solar-eclipse-large", caption: "Total solar eclipse" },
-        { file: "solar-eclipse", caption: "Solar eclipse ring" }
+        { file: "northearn-lights1", caption: "Northearn light's in my backyard (Oct 10, 2024)" },
+        { file: "northearn-lights2", caption: "Northern light's in my backyard (May 11, 2024)"},
+        { file: "solar-eclipse-large", caption: "Total solar eclipse in vermont (Apr 8, 2024)" },
+        { file: "solar-eclipse", caption: "Solar eclipse ring (Apr 8, 2024)" }
       ],
       duke: [
         { file: "duke-computer", caption: "Helping with the homework" },
@@ -109,7 +109,12 @@
     }
 
     for (const [sectionId, images] of Object.entries(galleryData)) {
-      const sectionTitle = sectionId === "celestial" ? "Celestial phenomena" : sectionId.charAt(0).toUpperCase() + sectionId.slice(1);
+      const sectionTitle = sectionId === "celestial" 
+      ? "Celestial phenomena" 
+      : sectionId === "food" 
+        ? "Homemade Comforts" 
+        : sectionId.charAt(0).toUpperCase() + sectionId.slice(1);
+
       generateGallerySection(sectionId, sectionTitle, images);
     }
 
